@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+</head>
+<body>
+	<form action="{% url 'index' %}" method="POST">
+		{% csrf_token %}
+		<p class="input-tag">Categories</p>
+		<select class="select" name="category">
+			{% if categories %}
+				{% for cat in categories %}
+				<option value="{{cat.id}}">{{cat.name}}</option>
+				{% endfor %}
+			{% else %}
+			<option>No categories</option>
+			{% endif %}
+		</select><br>
+
+		<p class="input-tag">Product</p>
+		<input type="text" name="product"><br>
+
+		<p class="input-tag">Price</p >
+		<input type="text" name="price">
+		<br>
+         
+        <p class="input-tag">Description</p>
+		<textarea cols="40" rows="10" name="description"></textarea>
+		<br><br>
+		<input type="submit">
+	</form>
+	<table>
+		<tr>
+			<th>Categories</th>
+			<th>Product Name</th>
+			<th>Price</th>
+		</tr>
+		{% if products %}
+			{% for product in products %}
+				<tr>
+				    <td>{{product.category.name}}</td>
+				    <td>{{product.product_name}}</td>
+				    <td>{{product.price}}</td>
+					<td><a href="{% url 'details' product.id %}">details</a></td>
+				</tr>
+			 {% endfor %}
+		{% endif %}
+	</table>
+</body>
+</html>

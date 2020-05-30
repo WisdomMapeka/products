@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+</head>
+<body>
+    <div class="pro-header">Product Details</div>
+    {% if product %}
+    <div class="name-pro"><span style="font-weight: bold; display: block;">Product Name</span><br> {{product.product_name}}</div><br><br>
+    <div class="name-pri"><span style="font-weight: bold; display: block;">Price</span><br>{{product.price}}</div><br><br>
+    <div class="name-cate"><span style="font-weight: bold; display: block;">Category</span><br>{{product.category.name}}</div><br><br>
+    <div class="name-desc"><span style="font-weight: bold; display: block;">Description</span><br> {{product.description}}</div>
+    {% endif %}
+    <button><a href="{% url 'index' %}">Add more products</a></button>
+</body>
+</html>
